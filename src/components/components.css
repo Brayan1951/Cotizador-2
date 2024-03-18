@@ -1,0 +1,62 @@
+.sidebar-closed {
+  background-color: #2f4050;
+    max-width: 90px;
+    overflow-x: hidden;
+  }
+  
+  .sidebar-open {
+    background-color: #2f4050;
+    min-width: 120px; 
+    max-width: 15%;
+    transition: width 0.5s ease; /* Animación de transición */
+    
+  }
+  
+  .navbar{
+
+    height: 100vh;
+  }
+
+
+  .menu-side button{
+    background-color: rgb(26, 179, 148);
+    width: 30%;
+    min-width: 50px;
+    height: 40px;
+  }
+  
+ 
+  
+  .menu-boton{
+    margin-left: 5px;
+    max-height: 80px !important;
+    background-color: #2f4050;;
+  }
+  
+  .menu{
+    background-color: #2f4050;
+    color: rgb(167, 177, 194);
+    /* padding: 40px 0px; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+  }
+  .rutas{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .ruta{
+    padding: 10px 0px;
+    /* background-color: red; */
+  }
+  ul,li,a{
+    color:rgb(167, 177, 194);
+    text-decoration: none;
+  }
+  

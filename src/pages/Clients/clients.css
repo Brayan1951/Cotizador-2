@@ -1,0 +1,51 @@
+.clientes-section{
+    
+    display: flex;
+    /* justify-content: end; */
+    flex-direction: column;
+}
+.buqueda-cliente{
+    width: 95%;
+    padding: 10px;
+    margin: 0 auto;
+}
+.busqueda{
+    display: flex;
+    flex-direction: row;  
+    width: 100%;
+    height: 100%;
+
+}
+
+
+
+.buqueda-cliente button{
+
+width: 40%;
+}
+
+.buqueda-cliente p{
+    min-width: 50px;
+}
+
+.buqueda-cliente .busqueda {
+    width: 100%;
+}
+
+
+
+.lista-clientes{
+    background-color: white;
+    width: 95%;
+    /* min-width: 280px; */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    /* align-self: center;  */
+    padding: 0 5px;
+}
+
+.clientes-section{
+    margin-top: 20px;
+}
+
