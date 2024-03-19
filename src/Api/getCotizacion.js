@@ -3,38 +3,7 @@ import { saveAs } from 'file-saver';
 
 function cabecera(sheet){
 
-  const  sheetUpdate=sheet
-  // const data = [
-  //   ['Dato10', 'Dato2', 'Dato3'],
-  //   ['Dato40', 'Dato5', 'Dato6'],
-  //   // Puedes agregar más filas de datos aquí según sea necesario
-  // ];
-
-  // // Comenzar a insertar desde la celda B26
-  // const startRow = 26;
-  // data.forEach((rowData, index) => {
-  //   const rowNumber = startRow + index;
-  //   sheetUpdate.addRow(rowData, `B${rowNumber}`);
-  // });
-  
-
-  return sheetUpdate
-
-}
-
-
-
-
-export async function leer_excel() {
-  try {
-    const workbook = new ExcelJS.Workbook();
-    const sheet = workbook.addWorksheet('Sheet1',{views: [{showGridLines: false}]});
-
-
-    // cabecera(sheet)
-// Valores
-
-sheet.getCell(4,2).value='RASH PERU S.A.C.'
+  sheet.getCell(4,2).value='RASH PERU S.A.C.'
 sheet.getCell(5,2).value='AV. SALAVERRY NRO. 3310'
 sheet.getCell(6,2).value='MAGDALENA DEL MAR - LIMA'
 sheet.getCell(7,2).value='RUC :  20378890161'
@@ -181,14 +150,89 @@ sheet.getCell(21,8).value='Correo'
     sheet.getCell('J19').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('J20').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('J21').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-
-
     
     
+    // return sheetUpdate
     
+  }
+  
+  function cierre(sheet) {
+    sheet.getCell(40,2).value='*El plazo máximo de entrega de los productos es de cinco (3) días hábiles contados a partir del día siguiente de la verificación del deposito en la cuenta de RASH PERU SAC'
+      sheet.mergeCells('B40:L40');
+      
+      sheet.getCell(42,2).value='CUENTA CORRIENTE SOLES BCP'
+      sheet.mergeCells('B42:E42');
+      sheet.getCell('B42').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B42').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+      sheet.getCell('B42').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell('B42').font =  {size: 12, color: { argb: 'FFFFFFFF' }, bold: true}
+      sheet.getCell(43,2).value='SOLES:    193-1115038-0-09'
+      sheet.mergeCells('B43:E43');
+      sheet.getCell('B43').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B43').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(44,2).value='CCI:     002-193-001115038009-12'
+      sheet.mergeCells('B44:E44');
+      sheet.getCell('B44').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B44').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      
+      sheet.getCell(45,2).value='CUENTA CORRIENTE SOLES BBVA'
+      sheet.mergeCells('B45:E45');
+      sheet.getCell('B45').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B45').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+      sheet.getCell('B45').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell('B45').font =  {size: 12, color: { argb: 'FFFFFFFF' }, bold: true}
+      sheet.getCell(46,2).value='SOLES:   0011-0686-0100024765'
+      sheet.mergeCells('B46:E46');
+      sheet.getCell('B46').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B46').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(47,2).value='CCI:    011-686-000100024765-38'
+      sheet.mergeCells('B47:E47');
+      sheet.getCell('B47').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B47').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      
+      sheet.getCell(48,2).value='CUENTA CORRIENTE SOLES INTERBANK'
+      sheet.mergeCells('B48:E48');
+      sheet.getCell('B48').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B48').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+      sheet.getCell('B48').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell('B48').font =  {size: 12, color: { argb: 'FFFFFFFF' }, bold: true}
+      sheet.getCell(49,2).value='SOLES:   200-3000232023'
+      sheet.mergeCells('B49:E49');
+      sheet.getCell('B49').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B49').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(50,2).value='CCI:    003-200-003000232023-39'
+      sheet.mergeCells('B50:E50');
+      sheet.getCell('B50').alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell('B50').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      
+      
+      
+      sheet.getCell(42,8).value='Nota: Realizar los abonos solo a las cuentas de la empresa RASH PERU S.A.C.'
+      sheet.mergeCells('H42:L45');
+      sheet.getCell('H42').alignment = { vertical: 'top', wrapText: true }
     
-    
-
+  }
+  
+  
+  
+  
+  export async function leer_excel() {
+    try {
+      const workbook = new ExcelJS.Workbook();
+      const sheet = workbook.addWorksheet('Sheet1',{views: [{showGridLines: false}]});
+      
+      
+      // cabecera(sheet)
+      // Valores
+      
+      
+      
+      
+      
+      cabecera(sheet)
+      cierre(sheet)
+      
+      
       // Comenzar a insertar desde la celda B26
       // const startRow = 26;
       // const startColumn=2;

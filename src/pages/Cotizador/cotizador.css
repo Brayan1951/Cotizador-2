@@ -33,7 +33,7 @@
 
     overflow-y: auto;
 }
-.datos-cotizacion .detalle .tc{width: 80px;}
+.datos-cotizacion .detalle .tc{width: 70px;}
 .datos-cotizacion p{
     font-size: 15px
 }
@@ -81,4 +81,9 @@ margin: 100px;
     text-align: center;
     width: 80px;
     padding: 10px 0;
+}
+
+input .tc {
+    /* height: 200px; */
+    max-width: 3px;
 }
