@@ -73,7 +73,7 @@ export default function DatosCotizacion() {
 
 
     const generar_excel = () => {
-        leer_excel()
+        leer_excel(listProducts)
         // console.log(CambioTc);
     }
 

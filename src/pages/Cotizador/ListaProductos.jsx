@@ -23,11 +23,11 @@ export default function ListaProductos() {
         <div className="lista">
             
             {
-                productos.map(({sku,descripcion},id) => {
+                productos.map(({sku,tempdescripcion},id) => {
                     return (
                         <div key={id} className='productos text-center row mb-2 py-2'>
                             <div className="col-6 m-auto">
-                                <p>{descripcion}</p>
+                                <p>{tempdescripcion}</p>
                             </div>
                             <div className="col m-auto">
                                 <h5>{sku}</h5>

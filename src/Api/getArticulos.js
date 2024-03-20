@@ -28,7 +28,8 @@ export const obtener_productos_sku = async (sku = "") => {
         const temp_producots = {
           sap:val[0],
           sku:val[1],
-          descripcion:tempdescripcion
+          descripcion:val[3],
+          tempdescripcion
         }
         productos.push(temp_producots)
       });

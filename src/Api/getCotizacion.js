@@ -1,5 +1,6 @@
 import ExcelJS from "exceljs";
 import { saveAs } from 'file-saver';
+import { useCotizacionStore } from "../store/cotizacion";
 
 function cabecera(sheet){
 
@@ -30,6 +31,14 @@ sheet.getCell(20,8).value='Teléfono'
 sheet.getCell(21,8).value='Correo'
 
 
+sheet.getCell(25,2).value='N°'
+sheet.getCell(25,3).value='Código'
+sheet.getCell(25,4).value='Descripción'
+sheet.getCell(25,8).value='Marca'
+sheet.getCell(25,9).value='Cantidad'
+sheet.getCell(25,10).value='Precio sin IGV'
+sheet.getCell(25,11).value='Precio con IGV'
+sheet.getCell(25,12).value='Importe sin IGV'
 
     // row colu}
     // fila 10 razon social 12 ruc 15 direccion
@@ -74,7 +83,8 @@ sheet.getCell(21,8).value='Correo'
     sheet.mergeCells('J19:L19');
     sheet.mergeCells('J20:L20');
     sheet.mergeCells('J21:L21');
-
+    
+    sheet.mergeCells('D25:G25');
     // Centrar
     sheet.getCell('B9').alignment = { vertical: 'middle', horizontal: 'center' };
     sheet.getCell('B10').alignment = { vertical: 'middle', horizontal: 'center' };
@@ -87,6 +97,15 @@ sheet.getCell(21,8).value='Correo'
     
     sheet.getCell('H9').alignment = { vertical: 'middle', horizontal: 'center' };
     sheet.getCell('H18').alignment = { vertical: 'middle', horizontal: 'center' };
+
+    sheet.getCell('B25').alignment = { vertical: 'middle', horizontal: 'center' };
+    sheet.getCell('C25').alignment = { vertical: 'middle', horizontal: 'center' };
+    sheet.getCell('D25').alignment = { vertical: 'middle', horizontal: 'center' };
+    sheet.getCell('H25').alignment = { vertical: 'middle', horizontal: 'center' };
+    sheet.getCell('I25').alignment = { vertical: 'middle', horizontal: 'center' };
+    sheet.getCell('J25').alignment = { vertical: 'middle', horizontal: 'center',wrapText: true  };
+    sheet.getCell('K25').alignment = { vertical: 'middle', horizontal: 'center',wrapText: true  };
+    sheet.getCell('L25').alignment = { vertical: 'middle', horizontal: 'center',wrapText: true  };
     
     // Color
 
@@ -99,6 +118,19 @@ sheet.getCell(21,8).value='Correo'
     sheet.getCell('H19').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
     sheet.getCell('H20').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
     sheet.getCell('H21').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+
+    sheet.getCell('H21').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+
+
+sheet.getCell('B25').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+sheet.getCell('C25').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+sheet.getCell('D25').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+sheet.getCell('H25').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+sheet.getCell('I25').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+sheet.getCell('J25').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+sheet.getCell('K25').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+sheet.getCell('L25').fill = {      type: 'pattern',      pattern: 'solid',      fgColor: { argb: 'FFFF0000' }   }
+
     
     sheet.getCell('B9').font =  {size: 12, color: { argb: 'FFFFFFFF' }, bold: true}
     sheet.getCell('B11').font =  {size: 12, color: { argb: 'FFFFFFFF' }, bold: true}
@@ -110,6 +142,16 @@ sheet.getCell(21,8).value='Correo'
     sheet.getCell('H19').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
     sheet.getCell('H20').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
     sheet.getCell('H21').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+
+sheet.getCell('B25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+sheet.getCell('C25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+sheet.getCell('D25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+sheet.getCell('H25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+sheet.getCell('I25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+sheet.getCell('J25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+sheet.getCell('K25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
+
 
 
     // Border
@@ -152,6 +194,19 @@ sheet.getCell(21,8).value='Correo'
     sheet.getCell('J21').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     
     
+    sheet.getCell('B25').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('C25').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('D25').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('H25').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('I25').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('J25').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('K25').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('L25').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+
+ 
+
+
+
     // return sheetUpdate
     
   }
@@ -216,22 +271,55 @@ sheet.getCell(21,8).value='Correo'
   
   
   
-  export async function leer_excel() {
+  export async function leer_excel(productos=[]) {
     try {
+
+
       const workbook = new ExcelJS.Workbook();
       const sheet = workbook.addWorksheet('Sheet1',{views: [{showGridLines: false}]});
       
       
-      // cabecera(sheet)
-      // Valores
+    
+
+      const startRow=26
+      productos.map(({sku,descripcion,cantidad,precio},i)=>{
+
+      const refRow=startRow+i
+      sheet.getCell(refRow,2).value=i+1
+      sheet.getCell(refRow,3).value=sku
+      sheet.getCell(refRow,4).value=descripcion
+      sheet.mergeCells(`D${refRow}:G${refRow}`);
+      
+
       
       
+      sheet.getCell(refRow,9).value=Number(cantidad)
+      sheet.getCell(refRow,10).value=parseFloat(((precio) / 1.18).toFixed(2))
       
+      sheet.getCell(refRow,11).value=parseFloat(precio)
+      
+      sheet.getCell(refRow,12).value=cantidad*((precio) / 1.18).toFixed(2)
+      
+      sheet.getCell(`B${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`C${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`D${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`H${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`I${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`J${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`K${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`L${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+
+
+
+
+
+
+      })
       
       
       cabecera(sheet)
       cierre(sheet)
-      
+      // console.log(listProducts);
       
       // Comenzar a insertar desde la celda B26
       // const startRow = 26;
