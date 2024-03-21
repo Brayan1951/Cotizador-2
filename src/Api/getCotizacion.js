@@ -1,7 +1,12 @@
 import ExcelJS from "exceljs";
 import { saveAs } from 'file-saver';
 
-function cabecera(sheet){
+function cabecera(sheet,tc,ejectivo){
+  const {nombre,telefono,correo}=ejectivo
+
+  // const fecha=new Date().getDate()
+  const hoy = new Date();
+  const fecha_hoy = hoy.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
   sheet.getCell(4,2).value='RASH PERU S.A.C.'
 sheet.getCell(5,2).value='AV. SALAVERRY NRO. 3310'
@@ -13,11 +18,14 @@ sheet.getCell(13,2).value='DIRECCIÓN FISCAL:'
 
 sheet.getCell(9,8).value='COTIZACIÓN VCO'
 sheet.getCell(10,8).value='Fecha'
+sheet.getCell(10,11).value=`${fecha_hoy}`
 sheet.getCell(11,8).value='Forma de Pago'
 sheet.getCell(12,8).value='Vigencia'
+sheet.getCell(12,11).value='72 horas'
 sheet.getCell(13,8).value='Tiempo de entrega'
 sheet.getCell(13,11).value='48 horas'
 sheet.getCell(14,8).value='Tipo de cambio'
+sheet.getCell(14,11).value=`${(parseFloat(tc)).toFixed(3)}`
 
 sheet.getCell(18,2).value='CLIENTE (DATOS ADICIONALES)'
 sheet.getCell(19,2).value='NOMBRE:'
@@ -26,8 +34,11 @@ sheet.getCell(21,2).value='CORREO:'
 
 sheet.getCell(18,8).value='Datos Ejecutivo Comercial'
 sheet.getCell(19,8).value='Nombre '
+sheet.getCell(19,10).value=`${nombre}`
 sheet.getCell(20,8).value='Teléfono'
+sheet.getCell(20,10).value=telefono
 sheet.getCell(21,8).value='Correo'
+sheet.getCell(21,10).value=correo
 
 
 sheet.getCell(25,2).value='N°'
@@ -61,6 +72,7 @@ sheet.getCell(25,12).value='Importe sin IGV'
     sheet.getColumn(2).width = 13
     sheet.getColumn(6).width = 20
     sheet.getColumn(7).width = 20
+    sheet.getColumn(12).width = 12
 
     
     sheet.mergeCells('H9:L9');
@@ -210,8 +222,7 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
     
   }
   
-  function cierre(sheet,row) {
-    console.log(row);
+  function cierre(sheet,row,monto,cambioTc) {
     sheet.getCell(row,2).value='*El plazo máximo de entrega de los productos es de cinco (3) días hábiles contados a partir del día siguiente de la verificación del deposito en la cuenta de RASH PERU SAC'
       sheet.mergeCells(`B${row}:L${row}`);
       
@@ -271,37 +282,89 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
       sheet.getCell(row+2,8).value='Nota: Realizar los abonos solo a las cuentas de la empresa RASH PERU S.A.C.'
       sheet.mergeCells(`H${row+2}:L${row+5}`);
       sheet.getCell(`H${row+2}`).alignment = { vertical: 'top', wrapText: true }
+
+
+
+
+
     
+
+// montos
+// console.log(monto);
+      sheet.getCell(row-4,10).value='Monto sin IGV'
+      sheet.mergeCells(`J${row-4}:K${row-4}`);
+      sheet.getCell(`J${row-4}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`J${row-4}`).font =  {bold: true}
+      
+      sheet.getCell(row-3,10).value='IGV'
+      sheet.mergeCells(`J${row-3}:K${row-3}`);
+      sheet.getCell(`J${row-3}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`J${row-3}`).font =  {bold: true}
+      
+      
+      sheet.getCell(row-2,10).value='Monto con IGV'
+      sheet.mergeCells(`J${row-2}:K${row-2}`);
+      sheet.getCell(`J${row-2}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`J${row-2}`).font =  {bold: true}
+
+      if (cambioTc) {
+        
+        sheet.getCell(row-4,12).value=`$ ${(monto / 1.18).toFixed(2)}`
+        sheet.getCell(row-3,12).value=`$ ${(monto*0.18).toFixed(2)}`
+        sheet.getCell(row-2,12).value=`$ ${monto}`
+      } else {
+        
+        sheet.getCell(row-4,12).value=`S/. ${(monto / 1.18).toFixed(2)}`
+        sheet.getCell(row-3,12).value=`S/. ${(monto*0.18).toFixed(2)}`
+        sheet.getCell(row-2,12).value=`S/. ${monto}`
+      }
+
+      sheet.getCell(`L${row-2}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`L${row-3}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`L${row-4}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+      sheet.getCell(`L${row-2}`).font =  {bold: true}
+      sheet.getCell(`L${row-3}`).font =  {bold: true}
+      sheet.getCell(`L${row-4}`).font =  {bold: true}
+
+      sheet.getCell(`L${row-2}`).alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell(`L${row-3}`).alignment = { vertical: 'middle', horizontal: 'center' };
+      sheet.getCell(`L${row-4}`).alignment = { vertical: 'middle', horizontal: 'center' };
+
+
+
+
+
   }
   
   
   
   
-  export async function leer_excel(productos=[]) {
+  export async function leer_excel(productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={}) {
     try {
 
 
       const workbook = new ExcelJS.Workbook();
       const sheet = workbook.addWorksheet('Sheet1',{views: [{showGridLines: false}]});
       
-      cabecera(sheet)
+      cabecera(sheet,tc,ejectivo)
       if (productos.length>7) {
-        cierre(sheet,31+productos.length)
+        cierre(sheet,31+productos.length,monto,cambioTc)
         
       } else {
-        cierre(sheet,38)
+        cierre(sheet,38,monto,cambioTc)
         
       }
     
 
       const startRow=26
-      productos.map(({sku,descripcion,cantidad,precio},i)=>{
+      productos.map(({sku,descripcion,marca,cantidad,precio},i)=>{
 
       const refRow=startRow+i
       sheet.getCell(refRow,2).value=i+1
       sheet.getCell(refRow,3).value=sku
       sheet.getCell(refRow,4).value=descripcion
       sheet.mergeCells(`D${refRow}:G${refRow}`);
+      sheet.getCell(refRow,8).value=marca
       
 
       
@@ -323,6 +386,7 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
       sheet.getCell(`L${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
       // sheet.insertRows(refRow+1)
 
+      
 
 
 

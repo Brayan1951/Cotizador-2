@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './components.css'
+import { useCotizacionStore } from '../store/cotizacion';
 
 const Navbar = () => {
+  const updateKAM = useCotizacionStore(state => state.updateKAM)
 
 
+  const KAM=[
+    {nombre:"Raquel",telefono:"954 050 517",correo:"rcarrion@rahsperu.com",}
+    ,{nombre:"Yovana",telefono:"996 192 014",correo:"ycondori@rahsperu.com",}
+    ,{nombre:"Natalia",telefono:"996 192 017",correo:"nroca@rahsperu.com",}
+    ,{nombre:"Sandra",telefono:"954 050 318",correo:"sdiaz@rahsperu.com",}
+    ,{nombre:"Mayra",telefono:"945 466 728",correo:"m@rahsperu.com",}
+    ,{nombre:"Joyce",telefono:"978 438 449",correo:"j@rahsperu.com",}
+  ]
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+
+  const asignarKam=(event)=>{
+    
+    const id=event.target.value
+    updateKAM(KAM[id])
+  }
+
 
   return (
     <nav className={`menu-side align-items-start col-2  p--md-2 navbar navbar-expand-lg   ${isOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
@@ -33,17 +51,21 @@ const Navbar = () => {
 
 
         </div>
-        {/* <div className="">
-      <select className="form-select mb-3" id="floatingSelectGrid">
-        <option selected disabled>Seleccion de KAM</option>
-        <option value="1">Raquel</option>
-        <option value="2">Yovana</option>
-        <option value="3">Natalia</option>
-        <option value="3">Sandra</option>
-        <option value="3">Mayra</option>
-        <option value="3">Joyce</option>
+        <div className="">
+      <select onChange={asignarKam}  defaultValue={-1} className="form-select mb-3" id="floatingSelectGrid">
+        <option  disabled value={-1}>Seleccion de KAM</option>
+        {
+          KAM.map(({nombre},id)=>{
+
+            return(
+              <option key={id} value={id}>{nombre}</option>
+            )
+
+          })
+        }
+
       </select>
-    </div> */}
+    </div>
 
 
 

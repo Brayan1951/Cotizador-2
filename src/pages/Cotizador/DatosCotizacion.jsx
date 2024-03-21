@@ -10,10 +10,11 @@ import './cotizador.css'
 export default function DatosCotizacion() {
 
     const listProducts = useCotizacionStore(state => state.productos)
+    const ejectivo = useCotizacionStore(state => state.ejectivo)
     const deleteProducto = useCotizacionStore(state => state.deleteProducto)
     const modifiProduct = useCotizacionStore(state => state.modifiProduct)
 
-    const { tc, changeForm, resetForm } = useForm({ tc: 1 })
+    const { tc, changeForm, resetForm } = useForm({ tc: 3.5 })
 
     const [CambioTc, setCambioTc] = useState(false)
 
@@ -73,8 +74,8 @@ export default function DatosCotizacion() {
 
 
     const generar_excel = () => {
-        leer_excel(listProducts)
-        // console.log(CambioTc);
+        // console.log(ejectivo);
+        leer_excel(listProducts,monto,tc,CambioTc,ejectivo)
     }
 
 

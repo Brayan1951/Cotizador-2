@@ -28,6 +28,7 @@ export const obtener_productos_sku = async (sku = "") => {
         const temp_producots = {
           sap:val[0],
           sku:val[1],
+          marca:val[2],
           descripcion:val[3],
           tempdescripcion
         }

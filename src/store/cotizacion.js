@@ -16,11 +16,8 @@ export const useCotizacionStore=create((set)=>({
     
     cliente:{},
     productos:[],
-    detalle:{
-        tc:1,
-        totalIGV:0,
-        totalSinIGV:0
-    },
+    ejectivo:{},
+  
 
 
     updateCliente:(client)=>set({cliente:client}),
@@ -39,6 +36,8 @@ export const useCotizacionStore=create((set)=>({
 
     deleteProducto:(productoId)=>set((state)=>({productos:state.productos.filter((val,id)=>id!==productoId ) })),
     clearProducto:()=>set((state)=>({productos:[]})),
+
+    updateKAM:(kam)=>set({ejectivo:kam}),
 
 
    
