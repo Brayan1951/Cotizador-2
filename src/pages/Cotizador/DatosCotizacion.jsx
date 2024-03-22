@@ -11,10 +11,12 @@ export default function DatosCotizacion() {
 
     const listProducts = useCotizacionStore(state => state.productos)
     const ejectivo = useCotizacionStore(state => state.ejectivo)
+    const cliente = useCotizacionStore(state => state.cliente)
+
     const deleteProducto = useCotizacionStore(state => state.deleteProducto)
     const modifiProduct = useCotizacionStore(state => state.modifiProduct)
 
-    const { tc, changeForm, resetForm } = useForm({ tc: 3.5 })
+    const { tc, changeForm, resetForm } = useForm({ tc: 1 })
 
     const [CambioTc, setCambioTc] = useState(false)
 
@@ -75,7 +77,8 @@ export default function DatosCotizacion() {
 
     const generar_excel = () => {
         // console.log(ejectivo);
-        leer_excel(listProducts,monto,tc,CambioTc,ejectivo)
+        leer_excel(cliente,listProducts,monto,tc,CambioTc,ejectivo)
+        // console.log(cliente);
     }
 
 
@@ -126,8 +129,8 @@ export default function DatosCotizacion() {
 
                                                 </th>
                                                 <td className=''>
-                                                    <button onClick={() => deleteListProduct(id)} className='mt-3 btn btn-light '>
-                                                        Delete
+                                                    <button onClick={() => deleteListProduct(id)} className='mt-3 btn btn-outline-danger '>
+                                                    <i class="bi bi-trash"></i>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -153,8 +156,9 @@ export default function DatosCotizacion() {
             </div>
 
             <div className="detalle  row  mt-3">
-                <div className="col-1 pt-2">
-                    <input className=" form-check-input m-auto " type="checkbox" onChange={
+                <div className="col-1 form-switch d-flex p-0">
+                    <label htmlFor="" className=''>T.C</label>
+                    <input role='switch' className=" form-check-input m-auto pt-3 " type="checkbox" onChange={
                         () => {
 
                             setCambioTc(!CambioTc)
@@ -199,11 +203,11 @@ export default function DatosCotizacion() {
                 } */}
 
                 <div className="col-4 row ">
-                    <p className='col-8 m-auto'>Monto Inc. IGV</p>
+                    <p className='col-8 m-auto'>Monto Sin IGV</p>
                     <input className='col' type="text" disabled value={montoSinIgv} />
                 </div>
                 <div className="col-4 row ">
-                    <p className='col-8 m-auto'>Monto Sin IGV ({(CambioTc == false) ? ' S/ ' : ' $ '}) </p>
+                    <p className='col-8 m-auto'>Monto Inc. IGV ({(CambioTc == false) ? ' S/ ' : ' $ '}) </p>
                     <input className='col' type="text" disabled value={monto} />
                 </div>
 

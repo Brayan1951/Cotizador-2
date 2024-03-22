@@ -1,20 +1,24 @@
 import ExcelJS from "exceljs";
 import { saveAs } from 'file-saver';
 
-function cabecera(sheet,tc,ejectivo){
+function cabecera(sheet,tc,ejectivo,cliente){
   const {nombre,telefono,correo}=ejectivo
-
+  const {ruc,razon_social,email,numero,nombre_cliente,direccion}=cliente
   // const fecha=new Date().getDate()
   const hoy = new Date();
   const fecha_hoy = hoy.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
-  sheet.getCell(4,2).value='RASH PERU S.A.C.'
+  sheet.getCell(4,2).value='RASH PERU S.R.L'
 sheet.getCell(5,2).value='AV. SALAVERRY NRO. 3310'
 sheet.getCell(6,2).value='MAGDALENA DEL MAR - LIMA'
 sheet.getCell(7,2).value='RUC :  20378890161'
+
 sheet.getCell(9,2).value='CLIENTE (Razón Social)'
+sheet.getCell(10,2).value=razon_social
 sheet.getCell(11,2).value='RUC: '
+sheet.getCell(12,2).value=ruc
 sheet.getCell(13,2).value='DIRECCIÓN FISCAL:'
+sheet.getCell(14,2).value=direccion
 
 sheet.getCell(9,8).value='COTIZACIÓN VCO'
 sheet.getCell(10,8).value='Fecha'
@@ -29,12 +33,15 @@ sheet.getCell(14,11).value=`${(parseFloat(tc)).toFixed(3)}`
 
 sheet.getCell(18,2).value='CLIENTE (DATOS ADICIONALES)'
 sheet.getCell(19,2).value='NOMBRE:'
+sheet.getCell(19,3).value=nombre_cliente
 sheet.getCell(20,2).value='TELÉFONO:'
+sheet.getCell(20,3).value=numero
 sheet.getCell(21,2).value='CORREO:'
+sheet.getCell(21,3).value=email
 
 sheet.getCell(18,8).value='Datos Ejecutivo Comercial'
 sheet.getCell(19,8).value='Nombre '
-sheet.getCell(19,10).value=`${nombre}`
+sheet.getCell(19,10).value=nombre
 sheet.getCell(20,8).value='Teléfono'
 sheet.getCell(20,10).value=telefono
 sheet.getCell(21,8).value='Correo'
@@ -70,9 +77,11 @@ sheet.getCell(25,12).value='Importe sin IGV'
     sheet.mergeCells('C21:E21');
 
     sheet.getColumn(2).width = 13
+    sheet.getColumn(3).width = 15
     sheet.getColumn(6).width = 20
     sheet.getColumn(7).width = 20
-    sheet.getColumn(12).width = 12
+    sheet.getColumn(8).width = 14
+    sheet.getColumn(12).width = 13
 
     
     sheet.mergeCells('H9:L9');
@@ -223,7 +232,7 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
   }
   
   function cierre(sheet,row,monto,cambioTc) {
-    sheet.getCell(row,2).value='*El plazo máximo de entrega de los productos es de cinco (3) días hábiles contados a partir del día siguiente de la verificación del deposito en la cuenta de RASH PERU SAC'
+    sheet.getCell(row,2).value='*El plazo máximo de entrega de los productos es de cinco (3) días hábiles contados a partir del día siguiente de la verificación del deposito en la cuenta de RASH PERU S.R.L'
       sheet.mergeCells(`B${row}:L${row}`);
       
       sheet.getCell(row+2,2).value='CUENTA CORRIENTE SOLES BCP'
@@ -279,7 +288,7 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
       
       
       
-      sheet.getCell(row+2,8).value='Nota: Realizar los abonos solo a las cuentas de la empresa RASH PERU S.A.C.'
+      sheet.getCell(row+2,8).value='Nota: Realizar los abonos solo a las cuentas de la empresa RASH PERU S.R.L'
       sheet.mergeCells(`H${row+2}:L${row+5}`);
       sheet.getCell(`H${row+2}`).alignment = { vertical: 'top', wrapText: true }
 
@@ -339,14 +348,14 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
   
   
   
-  export async function leer_excel(productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={}) {
+  export async function leer_excel(cliente={},productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={}) {
     try {
 
 
       const workbook = new ExcelJS.Workbook();
       const sheet = workbook.addWorksheet('Sheet1',{views: [{showGridLines: false}]});
       
-      cabecera(sheet,tc,ejectivo)
+      cabecera(sheet,tc,ejectivo,cliente)
       if (productos.length>7) {
         cierre(sheet,31+productos.length,monto,cambioTc)
         

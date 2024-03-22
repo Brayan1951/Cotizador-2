@@ -8,12 +8,12 @@ const Navbar = () => {
 
 
   const KAM=[
-    {nombre:"Raquel",telefono:"954 050 517",correo:"rcarrion@rahsperu.com",}
-    ,{nombre:"Yovana",telefono:"996 192 014",correo:"ycondori@rahsperu.com",}
-    ,{nombre:"Natalia",telefono:"996 192 017",correo:"nroca@rahsperu.com",}
-    ,{nombre:"Sandra",telefono:"954 050 318",correo:"sdiaz@rahsperu.com",}
-    ,{nombre:"Mayra",telefono:"945 466 728",correo:"m@rahsperu.com",}
-    ,{nombre:"Joyce",telefono:"978 438 449",correo:"j@rahsperu.com",}
+    ,{nombre:"Joyce Roman",telefono:"978 438 449",correo:"jroman@rashperu.com",},
+    ,{nombre:"Natalia Roca",telefono:"996 192 017",correo:"nroca@rahsperu.com",},
+    ,{nombre:"Mayra Delgado",telefono:"945 466 728",correo:"mdelgado@rashperu.com",}
+    ,{nombre:"Sandra Diaz",telefono:"954 050 318",correo:"sdiaz@rahsperu.com",},
+    {nombre:"Raquel Carrion",telefono:"954 050 517",correo:"rcarrion@rahsperu.com",}
+    ,{nombre:"Yovana Condori",telefono:"996 192 014",correo:"ycondori@rahsperu.com",}
   ]
   const [isOpen, setIsOpen] = useState(true);
 
@@ -30,7 +30,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className={`menu-side align-items-start col-2  p--md-2 navbar navbar-expand-lg   ${isOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+    <nav className={`menu menu-side align-items-start col-2  p--md-2 navbar navbar-expand-lg   ${isOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <button className=" menu-boton navbar-toggler" type="button" onClick={toggleSidebar}>
           <span className="navbar-toggler-icon"></span>
         </button>

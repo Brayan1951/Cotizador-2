@@ -14,13 +14,13 @@ export const useCotizacionStore=create((set)=>({
     
     // },
     
-    cliente:{},
+    cliente:{ruc:'',razon_social:'',email:'',numero:'',nombre_cliente:'',direccion:''},
     productos:[],
     ejectivo:{},
   
 
 
-    updateCliente:(client)=>set({cliente:client}),
+    updateCliente:(client)=>set((state)=>({cliente:{...client}})),
     addProducto:(producto)=>set((state)=>{
         const tempProducto={...producto,precio:1,cantidad:1}
         
