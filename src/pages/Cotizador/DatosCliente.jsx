@@ -31,7 +31,7 @@ export default function DatosCliente() {
 
 
 
-        <div className="datos-cliente  row g-2">
+        <div className="datos-cotizacion  row g-2">
 
             <div className="col-12 col-md-6  ">
                 <div className="input-group">
@@ -52,23 +52,24 @@ export default function DatosCliente() {
             </div>
             <div className="col-12 col-md-6">
                 <div className="form-floating">
-                    <input type="email" value={email} name='email' onChange={changeFormClient} className="form-control" id="floatingInputGrid" placeholder="name@example.com"  />
-                    <label htmlFor="floatingInputGrid">Correo Electronico</label>
+                    <input type="tel" value={nombre_cliente} name='nombre_cliente' onChange={changeFormClient} className="form-control" id="floatingInputGrid" placeholder="name@example.com"  />
+                    <label htmlFor="floatingInputGrid">Nombre</label>
                 </div>
             </div>
+       
             <div className="col-12 col-md-6">
                 <div className="form-floating">
                     <input type="tel" value={numero} name='numero' onChange={changeFormClient} className="form-control" id="floatingInputGrid" placeholder="name@example.com"  />
                     <label htmlFor="floatingInputGrid">Telefono</label>
                 </div>
             </div>
+       
             <div className="col-12 col-md-6">
                 <div className="form-floating">
-                    <input type="tel" value={nombre_cliente} name='nombre_cliente' onChange={changeFormClient} className="form-control" id="floatingInputGrid" placeholder="name@example.com"  />
-                    <label htmlFor="floatingInputGrid">Nombre</label>
+                    <input type="email" value={email} name='email' onChange={changeFormClient} className="form-control" id="floatingInputGrid" placeholder="name@example.com"  />
+                    <label htmlFor="floatingInputGrid">Correo Electronico</label>
                 </div>
             </div>
-          
             <div className="col ">
                 <div className="form-floating">
                     <input type="text" value={direccion} name='direccion' onChange={changeFormClient} className="form-control" id="floatingInputGrid" placeholder="name@example.com"  />

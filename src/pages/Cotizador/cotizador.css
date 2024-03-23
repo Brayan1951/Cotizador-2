@@ -12,21 +12,14 @@
 
 
 
-.formulario-cotizacion .datos-cliente{
-    width: 100%;
-    /* height: 31%; */
-    padding: 10px;
-    background-color: rgb(255, 255, 255);
-}
+
 
 .formulario-cotizacion .datos-cotizacion{
-    margin-top: 20px;
     background-color: white;
     padding: 15px;
 }
 .formulario-cotizacion .cotizacion-lista {
     overflow-x: auto;
-    /* max-height: 400px; */
     height: 330px;
 }
 .formulario-cotizacion .cotizacion-lista table tbody{
@@ -34,17 +27,18 @@
     overflow-y: auto;
 }
 .datos-cotizacion .detalle .tc{width: 70px;}
-.datos-cotizacion p{
+/* .datos-cotizacion p{
     font-size: 15px
-}
+} */
 .datos-cotizacion button{
-height: 40px;
+min-height: 58px;
+height: 100%;
 }
 
 
 /* productos */
 .producto-page{
-
+    
     max-width: 350px;
 }
 .lista-productos{
@@ -75,7 +69,6 @@ margin: 100px;
 }
 
 
-/* cotizacion */
 
 .cotizacion_cantidad,.cotizacion_precio{
     text-align: center;
@@ -86,4 +79,9 @@ margin: 100px;
 input .tc {
     /* height: 200px; */
     max-width: 3px;
+}
+
+
+.kam{
+    align-content: center;
 }

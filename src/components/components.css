@@ -36,20 +36,24 @@
   .menu{
     background-color: #2f4050;
     color: rgb(167, 177, 194);
-    /* padding: 40px 0px; */
-    height: 100vh   ;
+    padding: 40px 10px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    text-align: center;
+
+    /* width: 100%; */
    
   }
   .rutas{
 
     width: 100%;
+    min-height: 100vh;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-content: center;
   }
   .ruta{
     padding: 10px 0px;

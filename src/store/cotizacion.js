@@ -17,7 +17,8 @@ export const useCotizacionStore=create((set)=>({
     cliente:{ruc:'',razon_social:'',email:'',numero:'',nombre_cliente:'',direccion:''},
     productos:[],
     ejectivo:{},
-  
+    condicion:'',
+    NroOC:'',
 
 
     updateCliente:(client)=>set((state)=>({cliente:{...client}})),
@@ -38,6 +39,8 @@ export const useCotizacionStore=create((set)=>({
     clearProducto:()=>set((state)=>({productos:[]})),
 
     updateKAM:(kam)=>set({ejectivo:kam}),
+    updateOC:(oc)=>set({NroOC:oc}),
+    updateCondicion:(cond)=>set({condicion:cond}),
 
 
    

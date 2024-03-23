@@ -3,6 +3,7 @@ import './cotizador.css'
 import DatosCliente from './DatosCliente.jsx'
 import DatosCotizacion from './DatosCotizacion.jsx'
 import ListaProductoPage from './ListaProductoPage.jsx'
+import DatosExtra from './DatosExtra.jsx'
 
 export default function CotizadorPage() {
   return (
@@ -10,6 +11,7 @@ export default function CotizadorPage() {
       <div className="col-9 formulario-cotizacion ">
 
         <DatosCliente/>
+        <DatosExtra/>
         <DatosCotizacion/>
 
 

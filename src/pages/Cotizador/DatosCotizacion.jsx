@@ -12,6 +12,8 @@ export default function DatosCotizacion() {
     const listProducts = useCotizacionStore(state => state.productos)
     const ejectivo = useCotizacionStore(state => state.ejectivo)
     const cliente = useCotizacionStore(state => state.cliente)
+    const condicion = useCotizacionStore(state => state.condicion)
+    const NroOC = useCotizacionStore(state => state.NroOC)
 
     const deleteProducto = useCotizacionStore(state => state.deleteProducto)
     const modifiProduct = useCotizacionStore(state => state.modifiProduct)
@@ -47,6 +49,7 @@ export default function DatosCotizacion() {
             monto += precioTotal
         })
         const montoSinIgv = (monto / 1.18).toFixed(2)
+        monto = (monto ).toFixed(2)
 
 
         return { montoSinIgv, monto }
@@ -77,16 +80,16 @@ export default function DatosCotizacion() {
 
     const generar_excel = () => {
         // console.log(ejectivo);
-        leer_excel(cliente,listProducts,monto,tc,CambioTc,ejectivo)
+        leer_excel(cliente,listProducts,monto,tc,CambioTc,ejectivo,condicion,NroOC)
         // console.log(cliente);
     }
 
 
     return (
-        <div className='datos-cotizacion'>
+        <div className='datos-cotizacion mt-4'>
             <div className="row m-auto mt-0 pb-1">
                 <div className="col-6 m-auto text-center">
-                    <button className='btn btn-danger'>Generar PDF</button>
+                    <button disabled className='btn btn-danger'>Generar PDF</button>
                 </div>
                 <div className="col-6 m-auto text-center">
                     <button className='btn btn-success' onClick={() => generar_excel()}>Generar Excel</button>

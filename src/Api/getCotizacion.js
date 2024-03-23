@@ -1,7 +1,7 @@
 import ExcelJS from "exceljs";
 import { saveAs } from 'file-saver';
 
-function cabecera(sheet,tc,ejectivo,cliente){
+function cabecera(sheet,tc,ejectivo,cliente,condicion,NroOC){
   const {nombre,telefono,correo}=ejectivo
   const {ruc,razon_social,email,numero,nombre_cliente,direccion}=cliente
   // const fecha=new Date().getDate()
@@ -24,12 +24,16 @@ sheet.getCell(9,8).value='COTIZACIÓN VCO'
 sheet.getCell(10,8).value='Fecha'
 sheet.getCell(10,11).value=`${fecha_hoy}`
 sheet.getCell(11,8).value='Forma de Pago'
+sheet.getCell(11,11).value=condicion
 sheet.getCell(12,8).value='Vigencia'
 sheet.getCell(12,11).value='72 horas'
 sheet.getCell(13,8).value='Tiempo de entrega'
 sheet.getCell(13,11).value='48 horas'
 sheet.getCell(14,8).value='Tipo de cambio'
 sheet.getCell(14,11).value=`${(parseFloat(tc)).toFixed(3)}`
+sheet.getCell(15,8).value='Nro OC'
+sheet.getCell(15,11).value=NroOC
+
 
 sheet.getCell(18,2).value='CLIENTE (DATOS ADICIONALES)'
 sheet.getCell(19,2).value='NOMBRE:'
@@ -69,7 +73,7 @@ sheet.getCell(25,12).value='Importe sin IGV'
     sheet.mergeCells('B11:E11');
     sheet.mergeCells('B12:E12');
     sheet.mergeCells('B13:E13');
-    sheet.mergeCells('B14:E14');
+    sheet.mergeCells('B14:E15');
 
     sheet.mergeCells('B18:E18');
     sheet.mergeCells('C19:E19');
@@ -90,11 +94,14 @@ sheet.getCell(25,12).value='Importe sin IGV'
     sheet.mergeCells('H12:J12');
     sheet.mergeCells('H13:J13');
     sheet.mergeCells('H14:J14');
+    sheet.mergeCells('H15:J15');
+
     sheet.mergeCells('K10:L10');
     sheet.mergeCells('K11:L11');
     sheet.mergeCells('K12:L12');
     sheet.mergeCells('K13:L13');
     sheet.mergeCells('K14:L14');
+    sheet.mergeCells('K15:L15');
     
     sheet.mergeCells('H18:L18');
     sheet.mergeCells('H19:I19');
@@ -111,7 +118,8 @@ sheet.getCell(25,12).value='Importe sin IGV'
     sheet.getCell('B11').alignment = { vertical: 'middle', horizontal: 'center' };
     sheet.getCell('B12').alignment = { vertical: 'middle', horizontal: 'center' };
     sheet.getCell('B13').alignment = { vertical: 'middle', horizontal: 'center' };
-    sheet.getCell('B14').alignment = { vertical: 'middle', horizontal: 'center' };
+    sheet.getCell('B14').alignment = { vertical: 'middle', horizontal: 'center',wrapText: true };
+    // sheet.getCell('B15').alignment = { vertical: 'middle', horizontal: 'center' };
 
     sheet.getCell('B18').alignment = { vertical: 'middle', horizontal: 'center' };
     
@@ -182,6 +190,7 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
     sheet.getCell('B12').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('B13').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('B14').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('B15').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     
     sheet.getCell('B18').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('B19').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
@@ -198,11 +207,14 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
     sheet.getCell('H12').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('H13').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('H14').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('H15').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+   
     sheet.getCell('K10').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('K11').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('K12').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('K13').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     sheet.getCell('K14').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+    sheet.getCell('K15').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
     
     
     sheet.getCell('H18').border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
@@ -231,7 +243,7 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
     
   }
   
-  function cierre(sheet,row,monto,cambioTc) {
+function cierre(sheet,row,monto,cambioTc) {
     sheet.getCell(row,2).value='*El plazo máximo de entrega de los productos es de cinco (3) días hábiles contados a partir del día siguiente de la verificación del deposito en la cuenta de RASH PERU S.R.L'
       sheet.mergeCells(`B${row}:L${row}`);
       
@@ -316,16 +328,24 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
       sheet.getCell(`J${row-2}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
       sheet.getCell(`J${row-2}`).font =  {bold: true}
 
+      sheet.getCell(row-4,12).value=parseFloat((monto / 1.18).toFixed(2))
+      sheet.getCell(row-3,12).value=parseFloat((monto*0.18).toFixed(2))
+      sheet.getCell(row-2,12).value=monto
       if (cambioTc) {
         
-        sheet.getCell(row-4,12).value=`$ ${(monto / 1.18).toFixed(2)}`
-        sheet.getCell(row-3,12).value=`$ ${(monto*0.18).toFixed(2)}`
-        sheet.getCell(row-2,12).value=`$ ${monto}`
+        // sheet.getCell(row-4,12).value=`$ ${(monto / 1.18).toFixed(2)}`
+        // sheet.getCell(row-3,12).value=`$ ${(monto*0.18).toFixed(2)}`
+        sheet.getCell(row-2,12).numFmt = '"$"#,##0.00';
+        sheet.getCell(row-3,12).numFmt = '"$"#,##0.00';
+        sheet.getCell(row-4,12).numFmt = '"$"#,##0.00';
       } else {
         
-        sheet.getCell(row-4,12).value=`S/. ${(monto / 1.18).toFixed(2)}`
-        sheet.getCell(row-3,12).value=`S/. ${(monto*0.18).toFixed(2)}`
-        sheet.getCell(row-2,12).value=`S/. ${monto}`
+        // sheet.getCell(row-4,12).value=(monto / 1.18).toFixed(2)
+        // sheet.getCell(row-3,12).value=(monto*0.18).toFixed(2)
+        // sheet.getCell(row-2,12).value=monto
+        sheet.getCell(row-2,12).numFmt = '"S/"#,##0.00';
+        sheet.getCell(row-3,12).numFmt = '"S/"#,##0.00';
+        sheet.getCell(row-4,12).numFmt = '"S/"#,##0.00';
       }
 
       sheet.getCell(`L${row-2}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
@@ -348,14 +368,14 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
   
   
   
-  export async function leer_excel(cliente={},productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={}) {
+  export async function leer_excel(cliente={},productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={},condicion='Contado',NroOC='-') {
     try {
-
+      
 
       const workbook = new ExcelJS.Workbook();
       const sheet = workbook.addWorksheet('Sheet1',{views: [{showGridLines: false}]});
       
-      cabecera(sheet,tc,ejectivo,cliente)
+      cabecera(sheet,tc,ejectivo,cliente,condicion,NroOC)
       if (productos.length>7) {
         cierre(sheet,31+productos.length,monto,cambioTc)
         
@@ -383,7 +403,7 @@ sheet.getCell('L25').font =  {size: 11, color: { argb: 'FFFFFFFF' }, bold: true}
       
       sheet.getCell(refRow,11).value=parseFloat(precio)
       
-      sheet.getCell(refRow,12).value=cantidad*((precio) / 1.18).toFixed(2)
+      sheet.getCell(refRow,12).value=parseFloat(cantidad*((precio) / 1.18).toFixed(2))
       
       sheet.getCell(`B${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
       sheet.getCell(`C${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
