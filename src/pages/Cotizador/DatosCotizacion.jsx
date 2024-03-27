@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useCotizacionStore } from '../../store/cotizacion'
 import useForm from '../../hooks/useForm'
-import { leer_excel } from '../../Api/getCotizacion'
+import {  leer_excel } from '../../Api/getCotizacion'
 
 import './cotizador.css'
 
@@ -83,16 +83,20 @@ export default function DatosCotizacion() {
         leer_excel(cliente,listProducts,monto,tc,CambioTc,ejectivo,condicion,NroOC)
         // console.log(cliente);
     }
+    const generar_PDF=()=>{
+        // convertExcelToPDF(cliente,listProducts,monto,tc,CambioTc,ejectivo,condicion,NroOC)
+        // convertExcelToPDF()
 
+    }
 
     return (
         <div className='datos-cotizacion mt-4'>
             <div className="row m-auto mt-0 pb-1">
                 <div className="col-6 m-auto text-center">
-                    <button disabled className='btn btn-danger'>Generar PDF</button>
+                    <button  className='btn btn-danger'disabled onClick={()=>generar_PDF()}>Generar PDF</button>
                 </div>
                 <div className="col-6 m-auto text-center">
-                    <button className='btn btn-success' onClick={() => generar_excel()}>Generar Excel</button>
+                    <button className='btn btn-success'  onClick={() => generar_excel()}>Generar Excel</button>
                 </div>
             </div>
 

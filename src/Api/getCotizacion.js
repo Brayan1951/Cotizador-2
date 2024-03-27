@@ -1,5 +1,7 @@
 import ExcelJS from "exceljs";
 import { saveAs } from 'file-saver';
+import { PDFDocument } from "pdf-lib";
+
 
 function cabecera(sheet,tc,ejectivo,cliente,condicion,NroOC){
   const {nombre,telefono,correo}=ejectivo
@@ -330,7 +332,7 @@ function cierre(sheet,row,monto,cambioTc) {
 
       sheet.getCell(row-4,12).value=parseFloat((monto / 1.18).toFixed(2))
       sheet.getCell(row-3,12).value=parseFloat((monto*0.18).toFixed(2))
-      sheet.getCell(row-2,12).value=monto
+      sheet.getCell(row-2,12).value= parseFloat(monto)
       if (cambioTc) {
         
         // sheet.getCell(row-4,12).value=`$ ${(monto / 1.18).toFixed(2)}`
@@ -366,7 +368,44 @@ function cierre(sheet,row,monto,cambioTc) {
   }
   
   
+function completarDatos(sheet,productos) {
   
+  const startRow=26
+  productos.map(({sku,descripcion,marca,cantidad,precio},i)=>{
+
+  const refRow=startRow+i
+  sheet.getCell(refRow,2).value=i+1
+  sheet.getCell(refRow,3).value=sku
+  sheet.getCell(refRow,4).value=descripcion
+  sheet.mergeCells(`D${refRow}:G${refRow}`);
+  sheet.getCell(refRow,8).value=marca
+  
+
+  
+  
+  sheet.getCell(refRow,9).value=Number(cantidad)
+  sheet.getCell(refRow,10).value=parseFloat(((precio) / 1.18).toFixed(2))
+  
+  sheet.getCell(refRow,11).value=parseFloat(precio)
+  
+  sheet.getCell(refRow,12).value=Number(cantidad*(parseFloat(precio) / 1.18).toFixed(2))
+  
+  sheet.getCell(`B${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+  sheet.getCell(`C${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+  sheet.getCell(`D${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+  sheet.getCell(`H${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+  sheet.getCell(`I${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+  sheet.getCell(`J${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+  sheet.getCell(`K${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+  sheet.getCell(`L${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
+  
+
+
+
+
+  })
+  
+}
   
   export async function leer_excel(cliente={},productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={},condicion='Contado',NroOC='-') {
     try {
@@ -385,63 +424,52 @@ function cierre(sheet,row,monto,cambioTc) {
       }
     
 
-      const startRow=26
-      productos.map(({sku,descripcion,marca,cantidad,precio},i)=>{
-
-      const refRow=startRow+i
-      sheet.getCell(refRow,2).value=i+1
-      sheet.getCell(refRow,3).value=sku
-      sheet.getCell(refRow,4).value=descripcion
-      sheet.mergeCells(`D${refRow}:G${refRow}`);
-      sheet.getCell(refRow,8).value=marca
-      
-
-      
-      
-      sheet.getCell(refRow,9).value=Number(cantidad)
-      sheet.getCell(refRow,10).value=parseFloat(((precio) / 1.18).toFixed(2))
-      
-      sheet.getCell(refRow,11).value=parseFloat(precio)
-      
-      sheet.getCell(refRow,12).value=parseFloat(cantidad*((precio) / 1.18).toFixed(2))
-      
-      sheet.getCell(`B${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-      sheet.getCell(`C${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-      sheet.getCell(`D${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-      sheet.getCell(`H${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-      sheet.getCell(`I${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-      sheet.getCell(`J${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-      sheet.getCell(`K${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-      sheet.getCell(`L${refRow}`).border = {      top: { style: 'thin' },      left: { style: 'thin' },      bottom: { style: 'thin' },      right: { style: 'thin' },    };
-      // sheet.insertRows(refRow+1)
-
-      
-
-
-
-
-      })
-      
-      
+      completarDatos(sheet,productos)
      
-      // console.log(listProducts);
-      
-      // Comenzar a insertar desde la celda B26
-      // const startRow = 26;
-      // const startColumn=2;
-      // data.forEach((rowData, rowIndex) => {
-      //   const rowNumber = startRow + rowIndex;
-      //   rowData.forEach((cellData, colIndex) => {
-      //     const colLetter = String.fromCharCode(65 + startColumn + colIndex); // A=65, B=66, ...
-      //     sheet.getCell(`${colLetter}${rowNumber}`).value = cellData;
-      //   });
-      // });
 
     // Guardar el archivo Excel
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(blob, 'cotizador.xlsx');
+    return workbook
   } catch (error) {
     console.log(error);
   }
 }
+//   export async function leer_excel_Prueba(cliente={},productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={},condicion='Contado',NroOC='-') {
+//     try {
+      
+
+//       const workbook = new ExcelJS.Workbook();
+//       const sheet = workbook.addWorksheet('Sheet1',{views: [{showGridLines: false}]});
+      
+//       cabecera(sheet,tc,ejectivo,cliente,condicion,NroOC)
+//       if (productos.length>7) {
+//         cierre(sheet,31+productos.length,monto,cambioTc)
+        
+//       } else {
+//         cierre(sheet,38,monto,cambioTc)
+        
+//       }
+    
+
+//       completarDatos(sheet,productos)
+     
+
+//     // Guardar el archivo Excel
+//     const buffer = await workbook.xlsx.writeBuffer();
+//     // const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+//     // saveAs(blob, 'cotizador.xlsx');
+//     return workbook
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+
+
+// export async function convertExcelToPDF(cliente={},productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={},condicion='Contado',NroOC='-') {
+//   console.log("prueba");
+
+// }
+
