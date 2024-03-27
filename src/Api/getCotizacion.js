@@ -1,7 +1,7 @@
 import ExcelJS from "exceljs";
 import { saveAs } from 'file-saver';
-import { PDFDocument } from "pdf-lib";
-
+import { PDFDocument } from 'pdf-lib';
+import logo from './../assets/Imagen1.jpg'
 
 function cabecera(sheet,tc,ejectivo,cliente,condicion,NroOC){
   const {nombre,telefono,correo}=ejectivo
@@ -422,12 +422,24 @@ function completarDatos(sheet,productos) {
         cierre(sheet,38,monto,cambioTc)
         
       }
-    
-
       completarDatos(sheet,productos)
-     
 
+      const response = await fetch(logo);
+      const imageArrayBuffer = await response.arrayBuffer();
+ 
+      const imageId = workbook.addImage({
+        buffer: imageArrayBuffer,
+        extension: 'jpg',
+      });
+    
+      sheet.addImage(imageId, {
+        tl: { col: 8.5, row: 0 },
+        br: { col: 12, row: 8 },
+      });
     // Guardar el archivo Excel
+
+
+
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     saveAs(blob, 'cotizador.xlsx');
@@ -436,40 +448,3 @@ function completarDatos(sheet,productos) {
     console.log(error);
   }
 }
-//   export async function leer_excel_Prueba(cliente={},productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={},condicion='Contado',NroOC='-') {
-//     try {
-      
-
-//       const workbook = new ExcelJS.Workbook();
-//       const sheet = workbook.addWorksheet('Sheet1',{views: [{showGridLines: false}]});
-      
-//       cabecera(sheet,tc,ejectivo,cliente,condicion,NroOC)
-//       if (productos.length>7) {
-//         cierre(sheet,31+productos.length,monto,cambioTc)
-        
-//       } else {
-//         cierre(sheet,38,monto,cambioTc)
-        
-//       }
-    
-
-//       completarDatos(sheet,productos)
-     
-
-//     // Guardar el archivo Excel
-//     const buffer = await workbook.xlsx.writeBuffer();
-//     // const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-//     // saveAs(blob, 'cotizador.xlsx');
-//     return workbook
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-
-
-// export async function convertExcelToPDF(cliente={},productos=[],monto=0,tc=3.5,cambioTc=false,ejectivo={},condicion='Contado',NroOC='-') {
-//   console.log("prueba");
-
-// }
-

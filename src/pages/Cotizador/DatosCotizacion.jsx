@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useCotizacionStore } from '../../store/cotizacion'
 import useForm from '../../hooks/useForm'
-import {  leer_excel } from '../../Api/getCotizacion'
+import {   leer_excel } from '../../Api/getCotizacion'
 
 import './cotizador.css'
 
@@ -84,8 +84,7 @@ export default function DatosCotizacion() {
         // console.log(cliente);
     }
     const generar_PDF=()=>{
-        // convertExcelToPDF(cliente,listProducts,monto,tc,CambioTc,ejectivo,condicion,NroOC)
-        // convertExcelToPDF()
+     
 
     }
 
