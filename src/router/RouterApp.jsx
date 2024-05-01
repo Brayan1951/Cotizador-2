@@ -1,5 +1,5 @@
 import React from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import {  createHashRouter } from 'react-router-dom'
 import HomePage from '../pages/Home/HomePage'
 import ClientsPage from '../pages/Clients/ClientsPage'
 import CotizadorPage from '../pages/Cotizador/CotizadorPage'
@@ -7,7 +7,7 @@ import CotizadorPage from '../pages/Cotizador/CotizadorPage'
 export default function RouterApp() {
 
 
-    const router=createBrowserRouter([
+    const router=createHashRouter([
         {path:'/',element:<HomePage/>,
         children:[
           {path:'clientes',element:<ClientsPage/>},
