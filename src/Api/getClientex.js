@@ -1,15 +1,18 @@
 import axios from "axios";
 import { useState } from "react";
+import { Cliente, Clientes } from "../Class/Clientes";
 
 const dev = true;
 
-const baseref = dev ? "http://127.0.0.1:8000" : ".com";
+// const baseref = dev ? "http://127.0.0.1:8000" : ".com";
 
 // const api='AIzaSyBJfoE4KZv3uuMGpXzqvYP4J5Rt3HR8jiw'
 
 export const obtener_Cliente_RazonSocial = async (razon_social = "") => {
+
+  const listaClientes=new Clientes();
+
   const temp = razon_social.toUpperCase();
-  // const [clientes, setclientes] = useState([]);
   var clientes = [];
 
   try {
@@ -25,6 +28,7 @@ export const obtener_Cliente_RazonSocial = async (razon_social = "") => {
     const response = await axios.get(
       "https://sheets.googleapis.com/v4/spreadsheets/1vG_Cw_9r3KfvPsbcoPQCEYGWKLMaadHtkmIlUdJHAyc/values/LC!A1:G?key=AIzaSyBJfoE4KZv3uuMGpXzqvYP4J5Rt3HR8jiw"
     );
+
     const filter = response.data.values.filter((row) =>
       row[2].startsWith(temp)
     );
@@ -36,17 +40,40 @@ export const obtener_Cliente_RazonSocial = async (razon_social = "") => {
       const validarLC=(parseInt(val[3].replace(/,/g, '')) >30000)?' es mayor que 30,000':val[3]
       
       const temp_clientes = {
-        codigo: val[0],
-        ruc: val[1],
-        razon_social: val[2],
-        linea_credito: validarLC,
-        email: val[4],
-        telefono: val[5],
-        direccion: val[6],
+        codigo:         val[0],
+        ruc:            val[1],
+        razon_social:   val[2],
+        email:          val[4],
+        telefono:       val[5],
+        direccion:      val[6],
+        linea_credito:  validarLC,
       }
+
+      // const auxC=new Cliente(val[0],
+      //   val[1],
+      //   val[2],
+      //   val[4],
+      //   val[5],
+      //   val[6],validarLC)
+      
+      
+
+      listaClientes.agregar(new Cliente(
+        val[0],
+        val[1],
+        val[2],
+        val[4],
+        val[5],
+        val[6],
+        validarLC)
+      )
+
+
       clientes.push(temp_clientes)
     });
     // console.log(clientes);
+
+    console.log(listaClientes);
 
     return {
       resp:true,

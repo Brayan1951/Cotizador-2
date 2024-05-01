@@ -1,18 +1,8 @@
 import {create} from 'zustand'
 
-// const totalDetalle=(productos=[],tc=1)=>{
-//     productos.map((val)=>{
-//         console.log(val);
-//     })
-// }
-
 export const useCotizacionStore=create((set)=>({
 
-    // cotizacion:{
-    //     cliente:{},
-        
-    
-    // },
+
     
     cliente:{ruc:'',razon_social:'',email:'',numero:'',nombre_cliente:'',direccion:''},
     productos:[],
